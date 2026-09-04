@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>후후쇼 예매하기</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 30px 20px;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      text-align: center;
+    }
+
+    .box {
+      max-width: 420px;
+      margin: 80px auto;
+      background: white;
+      padding: 40px 25px;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .naver {
+      display: block;
+      background: #03C75A;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    .web {
+      display: block;
+      color: #666;
+      font-size: 14px;
+      text-decoration: underline;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <h1>&lt;후후쇼&gt; 예매하기</h1>
+
+  <p>
+    네이버 앱에서 예매하시면<br>
+    로그인 상태로 편리하게 예매하실 수 있습니다.
+  </p>
+
+  <a class="naver" href="#" onclick="openNaver(); return false;">
+    네이버 앱에서 예매하기
+  </a>
+
+  <a class="web"
+     href="https://booking.naver.com/booking/12/bizes/1685204">
+    네이버 앱이 열리지 않으면 웹에서 예매하기
+  </a>
+
+</div>
+
+<script>
+
+const bookingUrl =
+"https://booking.naver.com/booking/12/bizes/1685204";
+
+const encodedUrl = encodeURIComponent(bookingUrl);
+
+function openNaver() {
+
+  const isAndroid =
+    /Android/i.test(navigator.userAgent);
+
+  if (isAndroid) {
+
+    location.href =
+      "intent://inappbrowser?url=" +
+      encodedUrl +
+      "&target=new&version=6" +
+      "#Intent;" +
+      "scheme=naversearchapp;" +
+      "action=android.intent.action.VIEW;" +
+      "category=android.intent.category.BROWSABLE;" +
+      "package=com.nhn.android.search;" +
+      "end;";
+
+  } else {
+
+    location.href =
+      "naversearchapp://inappbrowser?url=" +
+      encodedUrl +
+      "&target=new&version=6";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
