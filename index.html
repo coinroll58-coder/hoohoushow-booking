@@ -3,117 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>후후쇼 예매하기</title>
+  <title>후후쇼 | 별빛극장</title>
 
   <style>
-    body {
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
-      padding: 30px 20px;
+      padding: 0;
+      background: #fdf9ef;
       font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      text-align: center;
     }
 
-    .box {
-      max-width: 420px;
-      margin: 80px auto;
-      background: white;
-      padding: 40px 25px;
-      border-radius: 20px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding-bottom: 95px;
+      background: #fdf9ef;
     }
 
-    h1 {
-      font-size: 28px;
-      margin-bottom: 15px;
-    }
-
-    p {
-      color: #555;
-      line-height: 1.6;
-      margin-bottom: 30px;
-    }
-
-    .naver {
+    .detail-image {
       display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* 화면 아래 고정 예매 영역 */
+    .booking-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 10px 15px;
+      padding-bottom: calc(10px + env(safe-area-inset-bottom));
+      background: rgba(255,255,255,0.96);
+      box-shadow: 0 -3px 15px rgba(0,0,0,0.10);
+      z-index: 999;
+    }
+
+    .booking-inner {
+      max-width: 690px;
+      margin: 0 auto;
+    }
+
+    .naver-button {
+      display: block;
+      width: 100%;
+      padding: 17px 10px;
+      border: 0;
+      border-radius: 12px;
       background: #03C75A;
       color: white;
-      text-decoration: none;
       font-size: 18px;
       font-weight: bold;
-      padding: 18px;
-      border-radius: 12px;
-      margin-bottom: 15px;
-    }
-
-    .web {
-      display: block;
-      color: #666;
-      font-size: 14px;
-      text-decoration: underline;
-      margin-top: 20px;
+      text-align: center;
+      cursor: pointer;
     }
   </style>
 </head>
 
 <body>
 
-<div class="box">
+  <main class="page">
+    <img
+      src="hoohoushow-detail.png"
+      alt="후후쇼 공연 상세 안내"
+      class="detail-image"
+    >
+  </main>
 
-  <h1>&lt;후후쇼&gt; 예매하기</h1>
-
-  <p>
-    네이버 앱에서 예매하시면<br>
-    로그인 상태로 편리하게 예매하실 수 있습니다.
-  </p>
-
-  <a class="naver" href="#" onclick="openNaver(); return false;">
-    네이버 앱에서 예매하기
-  </a>
-
-  <a class="web"
-     href="https://booking.naver.com/booking/12/bizes/1685204">
-    네이버 앱이 열리지 않으면 웹에서 예매하기
-  </a>
-
-</div>
+  <div class="booking-bar">
+    <div class="booking-inner">
+      <button class="naver-button" onclick="openNaver()">
+        네이버 앱에서 예매하기
+      </button>
+    </div>
+  </div>
 
 <script>
+  const bookingUrl =
+    "https://booking.naver.com/booking/12/bizes/1685204";
 
-const bookingUrl =
-"https://booking.naver.com/booking/12/bizes/1685204";
+  function openNaver() {
 
-const encodedUrl = encodeURIComponent(bookingUrl);
+    const encodedUrl = encodeURIComponent(bookingUrl);
+    const isAndroid = /Android/i.test(navigator.userAgent);
 
-function openNaver() {
+    if (isAndroid) {
 
-  const isAndroid =
-    /Android/i.test(navigator.userAgent);
+      location.href =
+        "intent://inappbrowser?url=" +
+        encodedUrl +
+        "&target=new&version=6" +
+        "#Intent;" +
+        "scheme=naversearchapp;" +
+        "action=android.intent.action.VIEW;" +
+        "category=android.intent.category.BROWSABLE;" +
+        "package=com.nhn.android.search;" +
+        "end;";
 
-  if (isAndroid) {
+    } else {
 
-    location.href =
-      "intent://inappbrowser?url=" +
-      encodedUrl +
-      "&target=new&version=6" +
-      "#Intent;" +
-      "scheme=naversearchapp;" +
-      "action=android.intent.action.VIEW;" +
-      "category=android.intent.category.BROWSABLE;" +
-      "package=com.nhn.android.search;" +
-      "end;";
-
-  } else {
-
-    location.href =
-      "naversearchapp://inappbrowser?url=" +
-      encodedUrl +
-      "&target=new&version=6";
-
+      location.href =
+        "naversearchapp://inappbrowser?url=" +
+        encodedUrl +
+        "&target=new&version=6";
+    }
   }
-
-}
-
 </script>
 
 </body>
