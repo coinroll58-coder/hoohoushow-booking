@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>후후쇼 | 별빛극장</title>
 
   <style>
@@ -17,102 +18,34 @@
       font-family: Arial, sans-serif;
     }
 
+    /* 상세페이지 전체 영역 */
     .page {
       max-width: 720px;
       margin: 0 auto;
-      padding-bottom: 95px;
+      padding-bottom: 115px;
       background: #fdf9ef;
     }
 
+    /* 상세페이지 이미지 */
     .detail-image {
       display: block;
       width: 100%;
       height: auto;
     }
 
-    /* 화면 아래 고정 예매 영역 */
+    /* 하단 고정 예매 영역 */
     .booking-bar {
       position: fixed;
       left: 0;
       right: 0;
       bottom: 0;
+
       padding: 10px 15px;
       padding-bottom: calc(10px + env(safe-area-inset-bottom));
-      background: rgba(255,255,255,0.96);
-      box-shadow: 0 -3px 15px rgba(0,0,0,0.10);
-      z-index: 999;
-    }
 
-    .booking-inner {
-      max-width: 690px;
-      margin: 0 auto;
-    }
+      background: rgba(255, 255, 255, 0.97);
 
-    .naver-button {
-      display: block;
-      width: 100%;
-      padding: 17px 10px;
-      border: 0;
-      border-radius: 12px;
-      background: #03C75A;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      text-align: center;
-      cursor: pointer;
-    }
-  </style>
-</head>
+      box-shadow:
+        0 -3px 15px rgba(0, 0, 0, 0.10);
 
-<body>
-
-  <main class="page">
-    <img
-      src="hoohoushow-detail.png.png"
-      alt="후후쇼 공연 상세 안내"
-      class="detail-image"
-    >
-  </main>
-
-  <div class="booking-bar">
-    <div class="booking-inner">
-      <button class="naver-button" onclick="openNaver()">
-        네이버 앱에서 예매하기
-      </button>
-    </div>
-  </div>
-
-<script>
-  const bookingUrl =
-    "https://booking.naver.com/booking/12/bizes/1685204";
-
-  function openNaver() {
-
-    const encodedUrl = encodeURIComponent(bookingUrl);
-    const isAndroid = /Android/i.test(navigator.userAgent);
-
-    if (isAndroid) {
-
-      location.href =
-        "intent://inappbrowser?url=" +
-        encodedUrl +
-        "&target=new&version=6" +
-        "#Intent;" +
-        "scheme=naversearchapp;" +
-        "action=android.intent.action.VIEW;" +
-        "category=android.intent.category.BROWSABLE;" +
-        "package=com.nhn.android.search;" +
-        "end;";
-
-    } else {
-
-      location.href =
-        "naversearchapp://inappbrowser?url=" +
-        encodedUrl +
-        "&target=new&version=6";
-    }
-  }
-</script>
-
-</body>
-</html>
+     **
